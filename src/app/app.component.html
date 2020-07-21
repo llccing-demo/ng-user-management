@@ -1,4 +1,7 @@
 <h1>{{title}}</h1>
-<app-users></app-users>
-<app-messages></app-messages>
+<nav>
+  <a routerLink="/dashboard">仪表盘</a>
+  <a routerLink="/users">用户列表</a>
+</nav>
 <router-outlet></router-outlet>
+<app-messages></app-messages>
