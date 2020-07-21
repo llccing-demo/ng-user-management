@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.styl']
 })
 export class AppComponent {
-  title = 'ng-user-management';
+  title = 'ng-user-management（用户管理）';
 }
