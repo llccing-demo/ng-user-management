@@ -1,17 +1,40 @@
-<div>
-  <!-- 注意，这里需要加 括号！ -->
-  <form (ngSubmit)="onSubmit()" [formGroup]="form">
-    <div *ngFor="let question of questions" class="form-row">
-      <app-dynamic-form-question [question]="question" [form]="form"></app-dynamic-form-question>
-    </div>
+<div class="dynamic-form">
 
-    <div class="form-row">
-      <button type="submit" [disabled]="!form.valid">保存</button>
-    </div>
-  </form>
+  <div class="form-show">
+    <!-- 注意，这里需要加 括号！ -->
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+      <div *ngFor="let question of questionList" class="form-row">
+        <app-dynamic-form-question [question]="question" [form]="form"></app-dynamic-form-question>
+      </div>
 
-  <div *ngIf="payLoad" class="form-row">
-    <strong>保存了如下值</strong><br>
-    {{payLoad}}
+      <div class="form-row">
+        <!-- <button type="submit" [disabled]="!form.valid">保存</button> -->
+      </div>
+    </form>
+
+    <div *ngIf="payLoad" class="form-row">
+      <strong>保存了如下值</strong><br>
+      {{payLoad}}
+    </div>
+  </div>
+
+  <div class="form-design">
+    <h3>请设计的问卷吧</h3>
+    <form>
+      <label>
+        标题：
+        <input type="text" [(ngModel)]="addQuestion.label" name="label">
+      </label>
+
+      <label>
+        类型
+        <select [(ngModel)]="addQuestion.type" name="type">
+          <option value="textbox">textbox</option>
+          <option value="dropdown">dropdown</option>
+        </select>
+      </label>
+
+      <button (click)="addFormControl()">添加到右侧</button>
+    </form>
   </div>
 </div>
