@@ -26,22 +26,23 @@ export class DynamicFormComponent implements OnInit {
     value: '',
     type: ''
   }
+  dynamicForm: FormGroup;
   questionList = []
   uniqueKey = 0
 
   constructor(private qcs: QuestionControlService, private qs: QuestionService) { }
 
   ngOnInit(): void {
-    this.qs.getQuestions().subscribe(questions => {
-      this.questions = questions
-      this.form = this.qcs.toFormGroup(this.questions);
-      console.log(this.questions)
-      console.log(this.form)
-    })
+    // this.qs.getQuestions().subscribe(questions => {
+    //   this.questions = questions
+    //   this.form = this.qcs.toFormGroup(this.questions);
+    //   console.log(this.questions)
+    //   console.log(this.form)
+    // })
   }
 
   onSubmit() {
-    this.payLoad = JSON.stringify(this.form.getRawValue());
+    this.payLoad = JSON.stringify(this.dynamicForm.getRawValue());
     console.log('submit payLoad', this.payLoad)
   }
 
@@ -52,12 +53,12 @@ export class DynamicFormComponent implements OnInit {
     if (type === 'textbox') {
       question = new TextboxQuestion({
         label,
-        // key: `key${this.uniqueKey++}`
+        key: `key${this.uniqueKey++}`
       })
     } else if(type === 'dropdown') {
       question = new DropdownQuestion({
         label,
-        // key: `key${this.uniqueKey++}`,
+        key: `key${this.uniqueKey++}`,
         options: [
           { key: '12', value: '12' },
           { key: '13', value: '13' },
@@ -69,5 +70,6 @@ export class DynamicFormComponent implements OnInit {
     }
 
     this.questionList.push(question)
+    this.dynamicForm = this.qcs.toFormGroup(this.questionList);
   }
 }

@@ -2,9 +2,9 @@
 
   <div class="form-show">
     <!-- 注意，这里需要加 括号！ -->
-    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <form (ngSubmit)="onSubmit()" *ngIf="questionList.length>0" [formGroup]="dynamicForm">
       <div *ngFor="let question of questionList" class="form-row">
-        <app-dynamic-form-question [question]="question" [form]="form"></app-dynamic-form-question>
+        <app-dynamic-form-question [question]="question" [form]="dynamicForm"></app-dynamic-form-question>
       </div>
 
       <div class="form-row">
